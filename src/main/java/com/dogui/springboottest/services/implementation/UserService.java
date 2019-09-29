@@ -1,5 +1,6 @@
 package com.dogui.springboottest.services.implementation;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,35 +10,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+//este import es import-ante ya que a partir de este construimos el user de buildUser.
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.dogui.springboottest.entities.User;
 import com.dogui.springboottest.entities.UserRole;
 import com.dogui.springboottest.repositories.IUserRepository;
 
 
 @Service("userService")
 public class UserService implements UserDetailsService {
-
+	
 	@Autowired
 	@Qualifier("userRepository")
 	private IUserRepository userRepository;
-	
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.dogui.springboottest.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 		return buildUser(user, buildGrantedAuthorities(user.getUserRoles()));
 	}
 	
-	
 	private User buildUser(com.dogui.springboottest.entities.User user, List<GrantedAuthority> grantedAuthorities) {
 		return new User(user.getUsername(), user.getPassword(), user.isEnabled(),
+						true, true, true, //accountNonExpired, credentialsNonExpired, accountNonLocked,
 						grantedAuthorities);
 	}
+	
+	
+	
 	
 	private List<GrantedAuthority> buildGrantedAuthorities(Set<UserRole> userRoles) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
@@ -46,5 +51,10 @@ public class UserService implements UserDetailsService {
 		}
 		return new ArrayList<GrantedAuthority>(grantedAuthorities);
 	}
+
+
+	
+	
+	
 
 }

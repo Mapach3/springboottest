@@ -10,4 +10,6 @@ public class SpringboottestApplication {
 		SpringApplication.run(SpringboottestApplication.class, args);
 	}
 
+	
+	
 }
