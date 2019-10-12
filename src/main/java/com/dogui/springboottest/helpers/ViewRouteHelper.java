@@ -3,28 +3,23 @@ package com.dogui.springboottest.helpers;
 public class ViewRouteHelper {
 	
 	
+	/**** Views ****/
+	//HOME
+	public final static String INDEX = "home/index";
+	public final static String HELLO = "home/hello";
+	public final static String DEGREE = "home/degree";
+	public final static String NEW_DEGREE = "home/newDegree";
 	
-	//Views
-	public static final String INDEX = "home/index";
-	public static final String HELLO = "home/hello";
-	public static final String DEGREE = "home/degree";
-	public static final String NEW_DEGREE = "home/newDegree";
-	
-	
-	
-	//Degree
+	//DEGREE
 	public final static String DEGREE_INDEX = "degree/index";
 	
-	
-	//Redirects
-	public final static String ROUTE = "/index";
-	public final static String DEGREE_ROOT = "/degrees/";
-	
-	//LOGIN
+	//USER
 	public final static String USER_LOGIN = "user/login";
-	
 	public final static String USER_LOGOUT = "user/logout";
 	
+	/**** Redirects ****/
+	public final static String ROUTE = "/index";
+	public final static String DEGREE_ROOT = "/degrees/";
 			
 			
 	

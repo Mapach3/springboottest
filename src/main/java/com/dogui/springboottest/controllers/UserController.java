@@ -11,8 +11,9 @@ import com.dogui.springboottest.helpers.ViewRouteHelper;
 public class UserController {
 
 	@GetMapping("/login")
-	public String login(Model model, @RequestParam(name = "error", required = false) String error,
-			@RequestParam(name = "logout", required = false) String logout) {
+	public String login(Model model, 
+					@RequestParam(name = "error", required = false) String error,
+					@RequestParam(name = "logout", required = false) String logout) {
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
 		return ViewRouteHelper.USER_LOGIN;

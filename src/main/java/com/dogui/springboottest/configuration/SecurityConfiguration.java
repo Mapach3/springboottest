@@ -16,8 +16,8 @@ import com.dogui.springboottest.services.implementation.UserService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -30,13 +30,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/css/*", "/imgs/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*",
+				.antMatchers("/css/*", "/js/*", "/vendor/bootstrap/css/*", "/vendor/jquery/*",
 						"/vendor/bootstrap/js/*")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.permitAll().anyRequest().authenticated().and().
+				
+				formLogin().loginPage("/login")
 				.loginProcessingUrl("/loginprocess").usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/loginsuccess").permitAll().and().logout().logoutUrl("/logout")
-				.logoutSuccessUrl("/logout").permitAll();
-		http.csrf().disable();
+				.defaultSuccessUrl("/loginsuccess").permitAll().
+				and().
+				
+				logout().logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll();
+		
 		
 
 	}
